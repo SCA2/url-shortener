@@ -1,0 +1,28 @@
+{
+  "name": "url-shortener",
+  "version": "1.0.0",
+  "description": "FCC URL Shortener Microservice",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SCA2/url-shortener.git"
+  },
+  "author": "Tim Ryan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SCA2/url-shortener/issues"
+  },
+  "homepage": "https://github.com/SCA2/url-shortener#readme",
+  "dependencies": {
+    "express": "^4.15.3"
+  },
+  "devDependencies": {
+    "chai": "^4.0.0",
+    "chai-http": "^3.0.0",
+    "mocha": "^3.4.2"
+  }
+}
