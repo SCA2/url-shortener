@@ -5,48 +5,27 @@ var expect = chai.expect;
 
 chai.use(chaiHttp);
 
-describe('request header parser microservice', () => {
-  describe('/api/whoami', () => {
+describe('url shortener microservice', () => {
+  describe('/new/:url', () => {
+    var long_url = 'https://www.google.com';
+    var short_url = 'https://little-url.herokuapp.com/389lo';
+    var path = '/little-url/new/' + long_url;
+
     it('should respond with status 200', (done) => {
       chai.request(server)
-      .get('/api/whoami')
-      .set('user-agent', 'Mozilla/5.0 (X11; Linux x86_64)') 
-      .set('accept-language', 'en-US')
+      .get(path)
       .end((err, res) => {
         expect(res.status).to.equal(200);
         done();
       })
     })
 
-    it('should return ip address', (done) => {
+    it('should return shortened url', (done) => {
       chai.request(server)
-      .get('/api/whoami')
-      .set('user-agent', 'Mozilla/5.0 (X11; Linux x86_64)') 
-      .set('accept-language', 'en-US')
+      .get(path)
       .end((err, res) => {
-        expect(JSON.parse(res.text).ipaddress).to.equal("127.0.0.1");
-        done();
-      })
-    })
-
-    it('should return language', (done) => {
-      chai.request(server)
-      .get('/api/whoami')
-      .set('user-agent', 'Mozilla/5.0 (X11; Linux x86_64)') 
-      .set('accept-language', 'en-US')
-      .end((err, res) => {
-        expect(JSON.parse(res.text).language).to.equal("en-US");
-        done();
-      })
-    })
-
-    it('should return OS', (done) => {
-      chai.request(server)
-      .get('/api/whoami')
-      .set('user-agent', 'Mozilla/5.0 (X11; Linux x86_64)') 
-      .set('accept-language', 'en-US')
-      .end((err, res) => {
-        expect(JSON.parse(res.text).software).to.equal("Linux 64");
+        expect(JSON.parse(res.text).original_url).to.equal(long_url);
+        expect(JSON.parse(res.text).short_url).to.equal(short_url);
         done();
       })
     })
